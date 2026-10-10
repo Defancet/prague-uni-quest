@@ -28,7 +28,7 @@ export const events: EventItem[] = [
     description: "Team up with students from across Prague to prototype AI-powered tools overnight. Mentors, pizza and prizes included.",
     organizer: "ČVUT Student Union",
     agenda: ["Kick-off & team forming", "Mentor check-ins at midnight", "Demo pitches & awards"],
-    image: img("photo-1504384308090-c894fdcc538d"),
+    image: img("photo-1522071820081-009f0129c71c"),
   },
   {
     id: "startup-pitch",
@@ -41,7 +41,7 @@ export const events: EventItem[] = [
     description: "Ten student founders pitch to real investors. Watch, vote and network with the Prague startup scene.",
     organizer: "Prague Student Founders",
     agenda: ["Founder pitches (5 min each)", "Investor Q&A panel", "Networking drinks"],
-    image: img("photo-1556761175-5973dc0f32e7"),
+    image: img("photo-1475721027785-f74eccf877e2"),
   },
   {
     id: "career-night-vse",

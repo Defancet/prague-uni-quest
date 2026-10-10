@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Calendar, Clock, MapPin, Search, Ticket, User, Compass, MousePointerClick, PartyPopper, CalendarX } from "lucide-react";
-import heroImg from "@/assets/hero-prague.jpg";
+import { Calendar, Clock, MapPin, Search, Ticket, Cpu, Briefcase, Users, Music, User, Compass, MousePointerClick, PartyPopper, CalendarX } from "lucide-react";
+const heroImg = "https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1920&q=75";
 import { categories, events, formatDate, type EventItem } from "@/lib/events";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,20 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+const catIcons = { Technology: Cpu, Business: Briefcase, Networking: Users, Entertainment: Music };
+
+function EventImage({ e, className }: { e: EventItem; className?: string }) {
+  const [failed, setFailed] = useState(false);
+  const Icon = catIcons[e.category];
+  if (failed)
+    return (
+      <div className={`grid place-items-center bg-gradient-to-br from-primary to-accent-foreground text-primary-foreground ${className ?? ""}`} role="img" aria-label={e.category}>
+        <Icon className="size-12 opacity-80" aria-hidden />
+      </div>
+    );
+  return <img src={e.image} alt="" loading="lazy" onError={() => setFailed(true)} className={`object-cover ${className ?? ""}`} />;
+}
 
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
@@ -120,7 +134,7 @@ function Index() {
                 return (
                   <li key={e.id} className="group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
                     <div className="relative aspect-[16/10] overflow-hidden">
-                      <img src={e.image} alt="" loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <EventImage e={e} className="size-full transition-transform duration-500 group-hover:scale-105" />
                       <span className="absolute left-3 top-3 rounded-full bg-card/95 px-3 py-1 text-xs font-semibold text-primary">{e.category}</span>
                       <span className="absolute right-3 top-3 rounded-xl bg-primary px-3 py-1.5 text-center text-primary-foreground">
                         <span className="block text-lg font-bold leading-none">{d.day}</span>
@@ -182,7 +196,7 @@ function Index() {
         <DialogContent className="max-h-[90vh] overflow-y-auto p-0 sm:max-w-lg">
           {selected && (
             <>
-              <img src={selected.image} alt="" className="aspect-video w-full object-cover" />
+              <EventImage e={selected} className="aspect-video w-full" />
               <div className="p-6">
                 <DialogHeader className="text-left">
                   <span className="w-fit rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">{selected.category}</span>
